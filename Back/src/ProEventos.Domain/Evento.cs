@@ -15,8 +15,8 @@ namespace ProEventos.Domain
         public string Email { get; set; }
 
         //Chave estrangeira
-        public IEnumerable<Lote> Lotess { get; set; }
+        public IEnumerable<Lote> Lotes { get; set; }
         public IEnumerable<RedeSocial> RedesSociais { get; set; }
-        public IEnumerable<Palestrante> PalestrantesEventos { get; set; }
+        public IEnumerable<PalestranteEvento> PalestrantesEventos { get; set; }
     }
 }

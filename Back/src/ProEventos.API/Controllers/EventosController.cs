@@ -77,21 +77,55 @@ namespace ProEventos.API.Controllers
         }
 
         [HttpPost]
-        public string Post()
+        public async Task<IActionResult> Post(Evento model)
         {
-            return "Exemplo de Post";
+            try
+            {
+                var evento = await _eventoService.AddEventos(model);
+                if (evento == null)
+                    return BadRequest("Erro ao tentar cadastrar evento");
+
+                return Ok(evento);
+
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Erro ao tentar cadastar o evento. Erro: {ex.Message}");
+            }
         }
 
         [HttpPut("{id}")]
-        public string Put(int id)
+        public async Task<IActionResult> Put(int id, Evento model)
         {
-            return $"Exemplo de Put com o id = {id}";
+            try
+            {
+                var evento = await _eventoService.UpdateEventos(id, model);
+                if (evento == null)
+                    return BadRequest("Erro ao tentar alterar evento");
+
+                return Ok(evento);
+
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Erro ao tentar atualizar o evento. Erro: {ex.Message}");
+            }
         }
 
         [HttpDelete("{id}")]
-        public string Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            return $"Exemplo de Put com o Delete = {id}";
+            try
+            {
+                return await _eventoService.DeleteEventos(id) ? Ok("deleteado") : BadRequest("Evento não deletado.");
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Erro ao tentar deletar o evento. Erro: {ex.Message}");
+            }
         }
     }
 }

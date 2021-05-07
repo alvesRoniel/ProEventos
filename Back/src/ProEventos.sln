@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProEventos.Domain", "ProEve
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProEventos.Persistence", "ProEventos.Persistence\ProEventos.Persistence.csproj", "{A18DEC4A-DC1B-48F1-B17B-F7BAAC853773}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProEventos.API", "ProEventos.API\ProEventos.API.csproj", "{296D194C-6CDD-4075-A991-63E034234D26}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,5 +60,17 @@ Global
 		{A18DEC4A-DC1B-48F1-B17B-F7BAAC853773}.Release|x64.Build.0 = Release|Any CPU
 		{A18DEC4A-DC1B-48F1-B17B-F7BAAC853773}.Release|x86.ActiveCfg = Release|Any CPU
 		{A18DEC4A-DC1B-48F1-B17B-F7BAAC853773}.Release|x86.Build.0 = Release|Any CPU
+		{296D194C-6CDD-4075-A991-63E034234D26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{296D194C-6CDD-4075-A991-63E034234D26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{296D194C-6CDD-4075-A991-63E034234D26}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{296D194C-6CDD-4075-A991-63E034234D26}.Debug|x64.Build.0 = Debug|Any CPU
+		{296D194C-6CDD-4075-A991-63E034234D26}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{296D194C-6CDD-4075-A991-63E034234D26}.Debug|x86.Build.0 = Debug|Any CPU
+		{296D194C-6CDD-4075-A991-63E034234D26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{296D194C-6CDD-4075-A991-63E034234D26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{296D194C-6CDD-4075-A991-63E034234D26}.Release|x64.ActiveCfg = Release|Any CPU
+		{296D194C-6CDD-4075-A991-63E034234D26}.Release|x64.Build.0 = Release|Any CPU
+		{296D194C-6CDD-4075-A991-63E034234D26}.Release|x86.ActiveCfg = Release|Any CPU
+		{296D194C-6CDD-4075-A991-63E034234D26}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

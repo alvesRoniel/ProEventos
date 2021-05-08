@@ -58,7 +58,7 @@ namespace ProEventos.API.Controllers
             }
         }
 
-        [HttpGet("{tema}/tema")]
+        [HttpGet("tema/{tema}")]
         public async Task<IActionResult> GetByTema(string tema)
         {
             try
@@ -91,7 +91,7 @@ namespace ProEventos.API.Controllers
             catch (Exception ex)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Erro ao tentar cadastar o evento. Erro: {ex.Message}");
+                    $"Erro ao tentar cadastrar o evento. Erro: {ex.Message}");
             }
         }
 

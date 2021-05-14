@@ -12,13 +12,18 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
+import { DateTimeFormatPipe } from './helpers/DateTimeFormat.pipe';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { EventosComponent } from './eventos/eventos.component';
-import { PalestrantesComponent } from './palestrantes/palestrantes.component';
-import { NavComponent } from './nav/nav.component';
+import { EventosComponent } from './components/eventos/eventos.component';
+import { ContatosComponent } from './components/contatos/contatos.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { EventoService } from './services/evento.service';
-import { DateTimeFormatPipe } from './helpers/DateTimeFormat.pipe';
+import { PalestrantesComponent } from './components/palestrantes/palestrantes.component';
+import { PerfilComponent } from './components/perfil/perfil.component';
+import { NavComponent } from './shared/nav/nav.component';
+import { TituloComponent } from './shared/titulo/titulo.component';
 
 
 @NgModule({
@@ -27,7 +32,11 @@ import { DateTimeFormatPipe } from './helpers/DateTimeFormat.pipe';
     EventosComponent,
     PalestrantesComponent,
     NavComponent,
-    DateTimeFormatPipe
+    DateTimeFormatPipe,
+    TituloComponent,
+    ContatosComponent,
+    DashboardComponent,
+    PerfilComponent
   ],
   imports: [
     BrowserModule,

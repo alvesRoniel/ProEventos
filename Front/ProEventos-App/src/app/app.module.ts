@@ -24,6 +24,8 @@ import { PalestrantesComponent } from './components/palestrantes/palestrantes.co
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { NavComponent } from './shared/nav/nav.component';
 import { TituloComponent } from './shared/titulo/titulo.component';
+import { EventoListaComponent } from './components/eventos/evento-lista/evento-lista.component';
+import { EventoDetalheComponent } from './components/eventos/evento-detalhe/evento-detalhe.component';
 
 
 @NgModule({
@@ -36,7 +38,9 @@ import { TituloComponent } from './shared/titulo/titulo.component';
     TituloComponent,
     ContatosComponent,
     DashboardComponent,
-    PerfilComponent
+    PerfilComponent,
+    EventoDetalheComponent,
+    EventoListaComponent
   ],
   imports: [
     BrowserModule,

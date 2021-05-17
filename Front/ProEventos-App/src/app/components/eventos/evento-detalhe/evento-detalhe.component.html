@@ -1,47 +1,175 @@
 <div class="card rounded shadow-sm">
-  <form>
+  <form [formGroup]="frmEventoDetalhe">
     <div class="p-3">
       <div class="form-row">
         <div class="form-group col-md-12">
           <label>Tema</label>
-          <input type="text" class="form-control" placeholder="Insira o Tema" />
+          <input
+            type="text"
+            class="form-control is-invalid"
+            [ngClass]="{
+              'is-invalid': f.tema?.errors && f.tema?.touched
+            }"
+            formControlName="tema"
+            placeholder="Informem o Tema."
+          />
+          <div
+            *ngIf="f.tema.errors?.required && f.tema?.touched"
+            class="invalid-feedback"
+          >
+            O tema é obrigatório.
+          </div>
+          <div
+            *ngIf="f.tema.errors?.minlength && f.tema?.touched"
+            class="invalid-feedback"
+          >
+            O tema deve ter no mínimo 4 caracteres.
+          </div>
+          <div
+            *ngIf="f.tema.errors?.maxlength && f.tema?.touched"
+            class="invalid-feedback"
+          >
+            O tema deve ter no máximo 50 caracteres.
+          </div>
         </div>
       </div>
       <div class="form-row">
         <div class="form-group col-md-8">
           <label>Local</label>
-          <input type="text" class="form-control" placeholder="" />
+          <input
+            type="text"
+            class="form-control is-invalid"
+            [ngClass]="{
+              'is-invalid': f.local?.errors && f.local?.touched
+            }"
+            formControlName="local"
+            placeholder="Informem o Local."
+          />
+          <div
+            *ngIf="f.local.errors?.required && f.local?.touched"
+            class="invalid-feedback"
+          >
+            O local é obrigatório.
+          </div>
         </div>
         <div class="form-group col-md-4">
           <label>Data e Hora</label>
-          <input type="datetime" class="form-control" placeholder="" />
+          <input
+            type="datetime"
+            class="form-control is-invalid"
+            [ngClass]="{
+              'is-invalid':
+                f.dataHoraEvento?.errors && f.dataHoraEvento?.touched
+            }"
+            formControlName="dataHoraEvento"
+            placeholder="Informem a Data e Hora."
+          />
+          <div
+            *ngIf="
+              f.dataHoraEvento.errors?.required && f.dataHoraEvento?.touched
+            "
+            class="invalid-feedback"
+          >
+            A data e hora são obrigatórios.
+          </div>
         </div>
       </div>
       <div class="form-row">
         <div class="form-group col-md-2">
           <label>Qtd Pessoas</label>
-          <input type="text" class="form-control" placeholder="" />
+          <input
+            type="number"
+            class="form-control is-invalid"
+            [ngClass]="{
+              'is-invalid': f.qtdPessoas?.errors && f.qtdPessoas?.touched
+            }"
+            formControlName="qtdPessoas"
+            placeholder="Informem a Quantidade de Pessoas."
+          />
+          <div
+            *ngIf="f.qtdPessoas.errors?.required && f.qtdPessoas?.touched"
+            class="invalid-feedback"
+          >
+            A quantidade de pessoas é obrigatória.
+          </div>
+          <div
+            *ngIf="f.qtdPessoas.errors?.max && f.qtdPessoas?.touched"
+            class="invalid-feedback"
+          >
+            A quantidade de pessoas não pode ser mais que 1000.
+          </div>
         </div>
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-2">
           <label>Telefone</label>
           <input
             type="text"
-            class="form-control"
+            class="form-control is-invalid"
+            [ngClass]="{
+              'is-invalid': f.telefone?.errors && f.telefone?.touched
+            }"
+            formControlName="telefone"
             placeholder="(000) 90000-0000"
           />
+          <div
+            *ngIf="f.telefone.errors?.required && f.telefone?.touched"
+            class="invalid-feedback"
+          >
+            O telefone é obrigatório.
+          </div>
         </div>
-        <div class="form-group col-md-6">
-          <label>Email</label>
-          <input type="text" class="form-control" placeholder="e-mail" />
+        <div class="form-group col-md-4">
+          <label>E-mail</label>
+          <input
+            type="text"
+            class="form-control is-invalid"
+            [ngClass]="{
+              'is-invalid': f.email?.errors && f.email?.touched
+            }"
+            formControlName="email"
+            placeholder="Informem o E-mail."
+          />
+          <div
+            *ngIf="f.email.errors?.required && f.email?.touched"
+            class="invalid-feedback"
+          >
+            O e-mail é obrigatório.
+          </div>
+          <div
+            *ngIf="f.email.errors?.email && f.email?.touched"
+            class="invalid-feedback"
+          >
+            O e-mail informado é inválido.
+          </div>
+        </div>
+        <div class="form-group col-md-4">
+          <label>Imagem</label>
+          <input
+            type="text"
+            class="form-control is-invalid"
+            [ngClass]="{
+              'is-invalid': f.imagemURL?.errors && f.imagemURL?.touched
+            }"
+            formControlName="imagemURL"
+            placeholder="Informem a Imagem URL."
+          />
+          <div
+            *ngIf="f.imagemURL.errors?.required && f.imagemURL?.touched"
+            class="invalid-feedback"
+          >
+            A imagem URL é obrigatória.
+          </div>
         </div>
       </div>
     </div>
     <div class="card-footer">
       <div class="d-flex">
-        <button class="btn btn-outline-secondary mr-auto border">
+        <button
+          class="btn btn-outline-secondary mr-auto border"
+          (click)="resetForm()"
+        >
           Cancelar Alteração
         </button>
-        <button class="btn btn-success">
+        <button class="btn btn-success" [disabled]="!frmEventoDetalhe.valid">
           <!--span class="spinner-border spinner-border-sm mr-1"></!--span-->
           Salvar Evento
         </button>

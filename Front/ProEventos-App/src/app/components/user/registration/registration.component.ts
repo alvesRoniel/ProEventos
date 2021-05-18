@@ -28,7 +28,6 @@ export class RegistrationComponent implements OnInit {
       validators: ValidatorField.MustMatch('senha', 'confirmeSenha')
     };
 
-
     this.frmRegistration = this.formBuilder.group({
       primeiroNome: ['', Validators.required],
       ultimoNome: ['', Validators.required],

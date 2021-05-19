@@ -8,6 +8,7 @@ using ProEventos.Persistence.Contextos;
 using ProEventos.Domain;
 using ProEventos.Application.Interfaces;
 using Microsoft.AspNetCore.Http;
+using ProEventos.API.DTOs;
 
 namespace ProEventos.API.Controllers
 {
@@ -31,7 +32,24 @@ namespace ProEventos.API.Controllers
                 if (eventos == null)
                     return NotFound("Nenhum evento encontrado");
 
-                return Ok(eventos);
+                var eventosRetorno = new List<EventoDto>();
+
+                foreach (var evento in eventos)
+                {
+                    eventosRetorno.Add(new EventoDto
+                    {
+                        Id = evento.Id,
+                        Local = evento.Local,
+                        DataEvento = evento.DataEvento.ToString(),
+                        Tema = evento.Tema,
+                        QtdPessoas = evento.QtdPessoas,
+                        ImagemURL = evento.ImagemURL,
+                        Telefone = evento.Telefone,
+                        Email = evento.Email,
+                    });
+                }
+
+                return Ok(eventosRetorno);
             }
             catch (Exception ex)
             {

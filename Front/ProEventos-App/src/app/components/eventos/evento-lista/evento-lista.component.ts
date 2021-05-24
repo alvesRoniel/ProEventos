@@ -61,6 +61,8 @@ export class EventoListaComponent implements OnInit {
       complete: () => this.spinner.hide()
     });
 
+    console.log(this.eventosFiltrados);
+
   }
 
   public showHideImg(): void {

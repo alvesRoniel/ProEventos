@@ -8,7 +8,11 @@ import { Evento } from '../models/Evento';
 })
 
 export class EventoService {
-  baseURL = 'https://localhost:44390/api/eventos';
+  // visual 2019
+  //baseURL = 'https://localhost:44390/api/eventos';
+
+  //vscode
+  baseURL = 'https://localhost:5001/api/eventos';
 
   constructor(private http: HttpClient) { }
 

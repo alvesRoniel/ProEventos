@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Evento } from '../models/Evento';
+import { take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -17,16 +18,18 @@ export class EventoService {
   constructor(private http: HttpClient) { }
 
   getEvento(): Observable<Evento[]> {
-    return this.http.get<Evento[]>(this.baseURL);
+    return this.http.get<Evento[]>(this.baseURL).pipe(take(1));;
   }
   /*
     getEventosByTema(tema: string): Observable<Evento[]> {
       return this.http.get<Evento[]>(`${this.baseURL}/tema/${tema}`);
     }
 
-    getEventoById(id: number): Observable<Evento[]> {
-      return this.http.get<Evento[]>(`${this.baseURL}/${id}`);
+    */
+
+    getEventoById(id: number): Observable<Evento> {
+      return this.http.get<Evento>(`${this.baseURL}/${id}`)
+      .pipe(take(1));
     }
 
-    */
 }

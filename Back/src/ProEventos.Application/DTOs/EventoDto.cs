@@ -8,7 +8,7 @@ namespace ProEventos.Application.DTOs
         public int Id { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é obrigatório"),
-        StringLength(250, MinimumLength = 3, ErrorMessage = "O campo {0} deve ter entre 3 e 50 caracteres.")]
+        StringLength(250, MinimumLength = 3, ErrorMessage = "O campo {0} deve ter entre 3 e 250 caracteres.")]
         public string Local { get; set; }
 
 
@@ -17,7 +17,7 @@ namespace ProEventos.Application.DTOs
         public string DataEvento { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é obrigatório"),
-            StringLength(250, MinimumLength = 3, ErrorMessage = "O campo {0} deve ter entre 3 e 50 caracteres.")
+            StringLength(250, MinimumLength = 3, ErrorMessage = "O campo {0} deve ter entre 3 e 250 caracteres.")
         ]
         public string Tema { get; set; }
 

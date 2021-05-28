@@ -151,11 +151,29 @@
         <button
           class="btn btn-success"
           [disabled]="!form.valid"
-          (click)="salvarAlteracao()"
+          (click)="salvarAlterarEvento()"
         >
-          <!-- <span class="spinner-border spinner-border-sm mr-1"></span> -->
           Salvar Evento
         </button>
+
+        <div style="margin-left: 5px">
+          <button class="btn btn-outline-primary" routerLink="/eventos/detalhe">
+            <i class="fa fa-plus-circle my-1"></i>
+            Novo
+          </button>
+        </div>
+
+        <!--
+        <div style="margin: 5px">
+          <a
+            class="d-flex btn btn-outline-primary"
+            routerLink="/eventos/detalhe"
+          >
+            <i class="fa fa-plus-circle my-1"></i>
+            <b class="ml-1 d-none d-sm-block">Novo</b>
+          </a>
+        </div>
+-->
       </div>
     </div>
   </form>

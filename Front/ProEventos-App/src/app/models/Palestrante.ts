@@ -9,7 +9,7 @@ export interface Palestrante {
   telefone: string;
   email: string;
 
-  //Chave estrangeira
-  redesSociais: RedeSocial
+  // Chave estrangeira
+  redesSociais: RedeSocial;
   palestrantesEventos: PalestranteEvento;
 }

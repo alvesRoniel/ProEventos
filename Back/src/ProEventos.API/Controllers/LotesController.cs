@@ -13,9 +13,9 @@ namespace ProEventos.API.Controllers
     {
         private readonly ILoteService _loteService;
 
-        public LotesController(ILoteService eventoService)
+        public LotesController(ILoteService loteService)
         {
-            _loteService = eventoService;
+            _loteService = loteService;
         }
 
         [HttpGet("eventoId")]
@@ -55,7 +55,7 @@ namespace ProEventos.API.Controllers
             }
         }
 
-        [HttpDelete("{evenotId/loteId}")]
+        [HttpDelete("{evenotId}/{loteId}")]
         public async Task<IActionResult> Delete(int eventoId, int loteId)
         {
             try

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using ProEventos.Domain;
 using ProEventos.Application.Interfaces;
 using Microsoft.AspNetCore.Http;
 using ProEventos.Application.DTOs;

@@ -100,6 +100,10 @@ export class EventoListaComponent implements OnInit {
           this.toastr.success('O Evento foi deletado com sucesso!', 'Deletado.');
           this.carregarEventos();
         }
+        else {
+          this.toastr.error('Evento não encontrado!', 'Deletado.');
+          this.carregarEventos();
+        }
       },
       (error: any) => {
         console.error(error);
@@ -111,5 +115,7 @@ export class EventoListaComponent implements OnInit {
   decline(): void {
     this.modalRef.hide();
   }
+
+
 
 }

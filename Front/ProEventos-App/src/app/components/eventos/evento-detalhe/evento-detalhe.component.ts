@@ -60,6 +60,7 @@ export class EventoDetalheComponent implements OnInit {
         (evento: Evento) => {
           this.evento = { ...evento };
           this.form.patchValue(this.evento);
+          console.log(this.evento);
         },
         (error: any) => {
           this.spinner.hide();

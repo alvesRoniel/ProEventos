@@ -29,7 +29,7 @@ namespace ProEventos.API
         {
 
             services.AddDbContext<ProEventosContext>(
-                context => context.UseSqlite(Configuration.GetConnectionString("Default"))
+                context => context.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
             );
 
             //Para resolver o problema de ciclicidade

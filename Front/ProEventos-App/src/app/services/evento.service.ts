@@ -11,10 +11,11 @@ import { take } from 'rxjs/operators';
 
 export class EventoService {
   // visual 2019
-  // baseURL = 'https://localhost:44390/api/eventos';
+  baseURL = 'https://localhost:44390/api/eventos';
+
 
   // vscode
-  baseURL = 'https://localhost:5001/api/eventos';
+  // baseURL = 'https://localhost:5001/api/eventos';
 
   constructor(private httpClient: HttpClient) { }
 

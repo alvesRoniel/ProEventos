@@ -13,10 +13,10 @@ import { Lote } from '@app/models/Lote';
 export class LoteService {
 
   // visual 2019
-  // baseURL = 'https://localhost:44390/api/eventos';
+   baseURL = 'https://localhost:44390/api/eventos';
 
   // vscode
-  baseURL = 'https://localhost:5001/api/eventos';
+  //baseURL = 'https://localhost:5001/api/eventos';
 
   constructor(private httpClient: HttpClient) { }
 

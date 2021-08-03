@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import {
+  AbstractControl,
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators
+} from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { ToastrService } from 'ngx-toastr';
@@ -20,6 +27,10 @@ export class EventoDetalheComponent implements OnInit {
   evento = {} as Evento;
   form!: FormGroup;
   estadoSalvar = 'post';
+
+  get modoEditar(): boolean {
+    return this.estadoSalvar === 'put';
+  }
 
   get lotes(): FormArray {
     return this.form.get('lotes') as FormArray;
@@ -41,15 +52,16 @@ export class EventoDetalheComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private localeService: BsLocaleService,
-    private router: ActivatedRoute,
+    private activatedRouter: ActivatedRoute,
     private eventoService: EventoService,
     private spinner: NgxSpinnerService,
-    private toastr: ToastrService) {
+    private toastr: ToastrService,
+    private router: Router) {
     this.localeService.use('pt-br');
   }
 
   public carregarEvento(): void {
-    const eventoIdParam = this.router.snapshot.paramMap.get('id');
+    const eventoIdParam = this.activatedRouter.snapshot.paramMap.get('id');
 
     if (eventoIdParam !== null) {
       this.spinner.show();
@@ -94,42 +106,59 @@ export class EventoDetalheComponent implements OnInit {
     this.form.reset();
   }
 
-  public cssValidator(campoForm: FormControl): any {
+  public cssValidator(campoForm: FormControl | AbstractControl): any {
     return { 'is-invalid': campoForm.errors && campoForm.touched };
   }
 
-  public salvarAlterarEvento(): void {
+  public salvarEvento(): void {
     this.spinner.show();
     if (this.form.valid) {
 
-      if (this.estadoSalvar === 'post') {
+      this.evento = (this.estadoSalvar === 'post')
+        ? { ...this.form.value }
+        : { id: this.evento.id, ...this.form.value };
 
-        this.evento = { ...this.form.value };
+      this.eventoService[this.estadoSalvar](this.evento).subscribe(
+        (eventoRetorno: Evento) => {
+          this.toastr.success('Evento cadastrod com sucesso!', 'Sucesso');
+          this.router.navigate([`eventos/detalhe/${eventoRetorno.id}`]);
+        },
+        (error: any) => {
+          console.error(error);
+          this.spinner.hide();
+          this.toastr.error('Error ao salvar evento', 'Erro');
+        },
+        () => this.spinner.hide()
+      );
 
-        this.eventoService.salvarEvento(this.evento).subscribe(
-          () => this.toastr.success('Evento salvo com Sucesso!', 'Sucesso'),
-          (error: any) => {
-            console.error(error);
-            this.spinner.hide();
-            this.toastr.error('Error ao salvar evento', 'Erro');
-          },
-          () => this.spinner.hide()
-        );
-      }
-      else {
+      /*
+            if (this.estadoSalvar === 'post') {
 
-        this.evento = { id: this.evento.id, ...this.form.value };
+              this.evento = { ...this.form.value };
 
-        this.eventoService.alterarEvento(this.evento).subscribe(
-          () => this.toastr.success('Evento salvo com Sucesso!', 'Sucesso'),
-          (error: any) => {
-            console.error(error);
-            this.spinner.hide();
-            this.toastr.error('Error ao salvar evento', 'Erro');
-          },
-          () => this.spinner.hide()
-        );
-      }
+              this.eventoService.salvarEvento(this.evento).subscribe(
+                () => this.toastr.success('Evento salvo com Sucesso!', 'Sucesso'),
+                (error: any) => {
+                  console.error(error);
+                  this.spinner.hide();
+                  this.toastr.error('Error ao salvar evento', 'Erro');
+                },
+                () => this.spinner.hide()
+              );
+            }
+            else {
+              this.evento = { id: this.evento.id, ...this.form.value };
+
+              this.eventoService.alterarEvento(this.evento).subscribe(
+                () => this.toastr.success('Evento salvo com Sucesso!', 'Sucesso'),
+                (error: any) => {
+                  console.error(error);
+                  this.spinner.hide();
+                  this.toastr.error('Error ao salvar evento', 'Erro');
+                },
+                () => this.spinner.hide()
+              );
+            }*/
     }
   }
 
@@ -146,5 +175,12 @@ export class EventoDetalheComponent implements OnInit {
       dataInicio: [lote.dataInicio],
       dataFim: [lote.dataFim]
     });
+  }
+
+  public salvarLotes(): void {
+    this.spinner.show();
+    if (true) {
+      this.spinner.hide();
+    }
   }
 }

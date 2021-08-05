@@ -16,6 +16,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { EventoService } from '@app/services/evento.service';
 import { Evento } from '@app/models/Evento';
 import { Lote } from '@app/models/Lote';
+import { LoteService } from '@app/services/lote.service';
 
 @Component({
   selector: 'app-evento-detalhe',
@@ -24,6 +25,7 @@ import { Lote } from '@app/models/Lote';
 })
 export class EventoDetalheComponent implements OnInit {
 
+  eventoId: number;
   evento = {} as Evento;
   form!: FormGroup;
   estadoSalvar = 'post';
@@ -54,6 +56,7 @@ export class EventoDetalheComponent implements OnInit {
     private localeService: BsLocaleService,
     private activatedRouter: ActivatedRoute,
     private eventoService: EventoService,
+    private loteService: LoteService,
     private spinner: NgxSpinnerService,
     private toastr: ToastrService,
     private router: Router) {
@@ -61,26 +64,26 @@ export class EventoDetalheComponent implements OnInit {
   }
 
   public carregarEvento(): void {
-    const eventoIdParam = this.activatedRouter.snapshot.paramMap.get('id');
+    this.eventoId = +this.activatedRouter.snapshot.paramMap.get('id');
 
-    if (eventoIdParam !== null) {
+    if (this.eventoId !== null || this.eventoId === 0) {
       this.spinner.show();
 
       this.estadoSalvar = 'put';
 
-      this.eventoService.getEventoById(+eventoIdParam).subscribe(
-        (evento: Evento) => {
-          this.evento = { ...evento };
+      this.eventoService.getEventoById(this.eventoId).subscribe(
+        (EVENTO_RETORNO: Evento) => {
+          this.evento = { ...EVENTO_RETORNO };
           this.form.patchValue(this.evento);
-          console.log(this.evento);
+          this.evento.lotes.forEach(lote => {
+            this.lotes.push(this.criarLote(lote));
+          });
         },
         (error: any) => {
-          this.spinner.hide();
-          this.toastr.error('Erro ao tentar carregar Evento.', 'Erro!');
+          this.toastr.error('Erro ao carregar o Evento.');
           console.error(error);
         },
-        () => this.spinner.hide(),
-      );
+      ).add(() => this.spinner.hide());
     }
   }
 
@@ -118,47 +121,49 @@ export class EventoDetalheComponent implements OnInit {
         ? { ...this.form.value }
         : { id: this.evento.id, ...this.form.value };
 
-      this.eventoService[this.estadoSalvar](this.evento).subscribe(
-        (eventoRetorno: Evento) => {
-          this.toastr.success('Evento cadastrod com sucesso!', 'Sucesso');
-          this.router.navigate([`eventos/detalhe/${eventoRetorno.id}`]);
-        },
-        (error: any) => {
-          console.error(error);
-          this.spinner.hide();
-          this.toastr.error('Error ao salvar evento', 'Erro');
-        },
-        () => this.spinner.hide()
-      );
+      // this.eventoService[this.estadoSalvar](this.evento).subscribe(
+      //   (eventoRetorno: Evento) => {
+      //     this.toastr.success('Evento cadastrado com sucesso!', 'Sucesso');
+      //     this.router.navigate([`eventos/detalhe/${eventoRetorno.id}`]);
+      //   },
+      //   (error: any) => {
+      //     console.error(error);
+      //     this.spinner.hide();
+      //     this.toastr.error('Error ao salvar evento', 'Erro');
+      //   },
+      //   () => this.spinner.hide()
+      // );
 
-      /*
-            if (this.estadoSalvar === 'post') {
 
-              this.evento = { ...this.form.value };
+      if (this.estadoSalvar === 'post') {
 
-              this.eventoService.salvarEvento(this.evento).subscribe(
-                () => this.toastr.success('Evento salvo com Sucesso!', 'Sucesso'),
-                (error: any) => {
-                  console.error(error);
-                  this.spinner.hide();
-                  this.toastr.error('Error ao salvar evento', 'Erro');
-                },
-                () => this.spinner.hide()
-              );
-            }
-            else {
-              this.evento = { id: this.evento.id, ...this.form.value };
+        this.evento = { ...this.form.value };
 
-              this.eventoService.alterarEvento(this.evento).subscribe(
-                () => this.toastr.success('Evento salvo com Sucesso!', 'Sucesso'),
-                (error: any) => {
-                  console.error(error);
-                  this.spinner.hide();
-                  this.toastr.error('Error ao salvar evento', 'Erro');
-                },
-                () => this.spinner.hide()
-              );
-            }*/
+        this.eventoService.salvarEvento(this.evento).subscribe(
+          (EVENTO_RETORNO: Evento) => {
+            this.toastr.success('Evento salvo com sucesso!', 'Sucesso');
+            this.router.navigate([`eventos/detalhe/${EVENTO_RETORNO.id}`]);
+          },
+          (error: any) => {
+            console.log(error);
+            this.spinner.hide();
+            this.toastr.error('Erro ao salvar o evento', 'Erro');
+          }
+        );
+      }
+      else {
+        this.evento = { id: this.evento.id, ...this.form.value };
+
+        this.eventoService.alterarEvento(this.evento).subscribe(
+          () => this.toastr.success('Evento salvo com Sucesso!', 'Sucesso'),
+          (error: any) => {
+            console.error(error);
+            this.spinner.hide();
+            this.toastr.error('Erro ao salvar o evento', 'Erro');
+          },
+          () => this.spinner.hide()
+        );
+      }
     }
   }
 
@@ -179,8 +184,17 @@ export class EventoDetalheComponent implements OnInit {
 
   public salvarLotes(): void {
     this.spinner.show();
-    if (true) {
-      this.spinner.hide();
+    if (this.form.controls.lotes.valid) {
+      this.loteService.saveLote(this.eventoId, this.form.value.lotes).subscribe(
+        () => {
+          this.toastr.success('Lotes salvos com sucesso!', 'Sucesso');
+          this.lotes.reset();
+        },
+        (error: any) => {
+          this.toastr.error('Erro ao tentar salvar os lotes.', 'Erro');
+          console.log(error);
+        }
+      ).add(() => this.spinner.hide());
     }
   }
 }

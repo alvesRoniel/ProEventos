@@ -18,7 +18,7 @@ namespace ProEventos.API.Controllers
             _loteService = loteService;
         }
 
-        [HttpGet("eventoId")]
+        [HttpGet("{eventoId}")]
         public async Task<IActionResult> Get(int eventoId)
         {
             try

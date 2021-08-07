@@ -49,7 +49,7 @@ export class EventoDetalheComponent implements OnInit {
   get bsConfig(): any {
     return {
       adaptivePosition: true,
-      dateInputFormat: 'DD/MM/YYYY HH:mm',
+      dateInputFormat: 'DD/MM/YYYY HH:mm a',
       containerClass: 'theme-default',
       showWeekNumbers: false
     };
@@ -175,13 +175,17 @@ export class EventoDetalheComponent implements OnInit {
     });
   }
 
+  mudarValorData(value: Date, indice: number, campo: string): void {
+    this.lotes.value[indice][campo] = value;
+  }
+
   public salvarLotes(): void {
     this.spinner.show();
     if (this.form.controls.lotes.valid) {
       this.loteService.saveLote(this.eventoId, this.form.value.lotes).subscribe(
         () => {
           this.toastr.success('Lotes salvos com sucesso!', 'Sucesso');
-          this.lotes.reset();
+          // this.lotes.reset();
         },
         (error: any) => {
           this.toastr.error('Erro ao tentar salvar os lotes.', 'Erro');

@@ -169,7 +169,6 @@
 
 <!--Cadastro de Lotes-->
 <div class="card rounded shadow-sm mt-4" *ngIf="modoEditar">
-
   <!-- <p>Form value: {{ form.controls.lotes.value | json }}</p>
   <p>Form valid: {{ form.controls.lotes.status | json }}</p> -->
 
@@ -191,6 +190,7 @@
           <fieldset [formGroupName]="i" class="form-group">
             <legend class="d-flex justify-content-between capitalize">
               <button
+                (click)="removerLote(template, i)"
                 class="p-2 btn btn-sm btn-outline-warning mb-1 d-flex"
                 tooltip="Excluir Lote"
                 [adaptivePosition]="false"
@@ -273,3 +273,19 @@
   </div>
 </div>
 <br />
+
+<!--##### Modal #####-->
+<ng-template #template>
+  <div class="modal-body text-center">
+    <p>
+      Tem certeza que quer deletar o Lote:
+      <strong>{{ this.loteAtual.nome }}</strong> ?
+    </p>
+    <button type="button" class="btn btn-default" (click)="confirmDeleteLote()">
+      Sim
+    </button>
+    <button type="button" class="btn btn-primary" (click)="declineDeleteLote()">
+      Não
+    </button>
+  </div>
+</ng-template>

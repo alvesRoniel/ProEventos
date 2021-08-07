@@ -16,7 +16,7 @@ export class LoteService {
    baseURL = 'https://localhost:44390/api/lotes';
 
   // vscode
-  //baseURL = 'https://localhost:5001/api/eventos';
+  // baseURL = 'https://localhost:5001/api/eventos';
 
   constructor(private httpClient: HttpClient) { }
 

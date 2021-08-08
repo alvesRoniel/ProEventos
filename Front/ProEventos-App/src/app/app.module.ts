@@ -14,6 +14,7 @@ import { ptBrLocale } from 'ngx-bootstrap/locale';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { NgxCurrencyModule } from 'ngx-currency';
 
 /*Helprs*/
 import { DateTimeFormatPipe } from './helpers/DateTimeFormat.pipe';
@@ -78,6 +79,7 @@ defineLocale('pt-br', ptBrLocale);
       progressBar: true
     }),
     NgxSpinnerModule,
+    NgxCurrencyModule
 
   ],
   providers: [

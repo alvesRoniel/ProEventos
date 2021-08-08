@@ -71,7 +71,7 @@ export class EventoDetalheComponent implements OnInit {
   public carregarEvento(): void {
     this.eventoId = +this.activatedRouter.snapshot.paramMap.get('id');
 
-    if (this.eventoId !== null || this.eventoId === 0) {
+    if (this.eventoId !== null && this.eventoId !== 0) {
       this.spinner.show();
 
       this.estadoSalvar = 'put';
@@ -179,9 +179,13 @@ export class EventoDetalheComponent implements OnInit {
     this.lotes.value[indice][campo] = value;
   }
 
+  retornaTituloLote(tituloLote: string): string {
+    return tituloLote === null || tituloLote === '' ? 'Nome do Lote' : tituloLote;
+  }
+
   public salvarLotes(): void {
-    this.spinner.show();
     if (this.form.controls.lotes.valid) {
+      this.spinner.show();
       this.loteService.saveLote(this.eventoId, this.form.value.lotes).subscribe(
         () => {
           this.toastr.success('Lotes salvos com sucesso!', 'Sucesso');

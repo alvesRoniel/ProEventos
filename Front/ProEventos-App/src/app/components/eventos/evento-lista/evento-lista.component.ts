@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 
 import { Evento } from '@app/models/Evento';
 import { EventoService } from '@app/services/evento.service';
+import { environment } from '@environments/environment';
 
 @Component({
   selector: 'app-evento-lista',
@@ -66,6 +67,13 @@ export class EventoListaComponent implements OnInit {
 
   public showHideImg(): void {
     this.showImg = !this.showImg;
+  }
+
+  public exibirImagem(imagemURL: string): string {
+    return (imagemURL !== '')
+      ? `${environment.apiURL}resources/images/${imagemURL}`
+      : 'assets/img/semImagem.jpg';
+
   }
 
   filtrarEventos(filtrarPor: string): Evento[] {

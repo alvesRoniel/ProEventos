@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 
 import { Lote } from '@app/models/Lote';
+import { environment } from '@environments/environment';
 
 
 @Injectable(
@@ -13,7 +14,7 @@ import { Lote } from '@app/models/Lote';
 export class LoteService {
 
   // visual 2019
-   baseURL = 'https://localhost:44390/api/lotes';
+   baseURL =  environment.apiURL + 'api/lotes';
 
   // vscode
   // baseURL = 'https://localhost:5001/api/eventos';

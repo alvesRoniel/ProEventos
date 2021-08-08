@@ -19,6 +19,7 @@ import { Lote } from '@app/models/Lote';
 import { LoteService } from '@app/services/lote.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { LoteAtual } from '@app/models/LoteAtual';
+import { environment } from '@environments/environment';
 
 @Component({
   selector: 'app-evento-detalhe',
@@ -33,6 +34,8 @@ export class EventoDetalheComponent implements OnInit {
   form!: FormGroup;
   estadoSalvar = 'post';
   loteAtual = { id: 0, nome: '', indice: 0 };
+  imagemURL = 'assets/img/upload.png';
+  file: File;
 
   get modoEditar(): boolean {
     return this.estadoSalvar === 'put';
@@ -81,6 +84,11 @@ export class EventoDetalheComponent implements OnInit {
           this.evento = { ...EVENTO_RETORNO };
           this.form.patchValue(this.evento);
 
+          //Para carregar a imagem
+          if (this.evento.imagemURL !== '') {
+            this.imagemURL = environment.apiURL +'resources/images/' + this.evento.imagemURL;
+          }
+
           // Carrega os lotes do evento.
           this.evento.lotes.forEach(lote => {
             this.lotes.push(this.criarLote(lote));
@@ -107,7 +115,7 @@ export class EventoDetalheComponent implements OnInit {
       qtdPessoas: ['', [Validators.required, Validators.max(120000)]],
       telefone: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      imagemURL: ['', Validators.required],
+      imagemURL: [''],
       lotes: this.fb.array([]),
     });
   }
@@ -229,5 +237,29 @@ export class EventoDetalheComponent implements OnInit {
     this.modalRef.hide();
   }
 
+  onFileChange(ev: any): void {
+    const reader = new FileReader();
 
+    reader.onload = (event: any) => this.imagemURL = event.target.result;
+
+    this.file = ev.target.files;
+    reader.readAsDataURL(this.file[0]);
+
+    this.uploadImagem();
+  }
+
+  uploadImagem(): void {
+    this.spinner.show();
+
+    this.eventoService.postUpload(this.eventoId, this.file).subscribe(
+      () => {
+        this.carregarEvento();
+        this.toastr.success('Imagem atualizada com sucesso', 'Sucesso!');
+      },
+      (error: any) => {
+        this.toastr.error('Erro ao tentar fazer o upload da imagem', 'Erro');
+        console.error(error);
+      }
+    ).add(() => this.spinner.hide());
+  }
 }

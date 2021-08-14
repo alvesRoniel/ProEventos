@@ -13,6 +13,8 @@
   <ItemGroup>
     <Compile Include="Migrations\20210803222713_Initial.cs" />
     <Compile Include="Migrations\20210803222713_Initial.Designer.cs" />
+    <Compile Include="Migrations\20210814005606_IdentityMigration.cs" />
+    <Compile Include="Migrations\20210814005606_IdentityMigration.Designer.cs" />
     <Compile Include="Migrations\ProEventosContextModelSnapshot.cs" />
   </ItemGroup>
 

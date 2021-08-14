@@ -2,7 +2,7 @@
 
 namespace ProEventos.Domain.Identity
 {
-    public class UserRole : IdentityUserRole
+    public class UserRole : IdentityUserRole<int>
     {
         public User User { get; set; }
         public Role Roles { get; set; }

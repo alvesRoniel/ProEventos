@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ProEventos.Domain.Identity
 {
-    public class Role : IdentityRole
+    public class Role : IdentityRole<int>
     {
         public List<UserRole> UserRoles { get; set; }
     }

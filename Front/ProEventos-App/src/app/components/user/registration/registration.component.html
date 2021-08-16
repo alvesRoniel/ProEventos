@@ -101,21 +101,21 @@
           <label for="">Senha:</label>
           <input
             type="password"
-            formControlName="senha"
+            formControlName="password"
             [ngClass]="{
-              'is-invalid': f.senha?.errors && f.senha?.touched
+              'is-invalid': f.password?.errors && f.password?.touched
             }"
             class="form-control is-invalid"
             placeholder="Digite uma Senha"
           />
           <div
-            *ngIf="f.senha.errors?.required && f.senha?.touched"
+            *ngIf="f.password.errors?.required && f.password?.touched"
             class="invalid-feedback"
           >
             A Senha é obrigatório.
           </div>
           <div
-            *ngIf="f.senha.errors?.minlength && f.senha?.touched"
+            *ngIf="f.password.errors?.minlength && f.password?.touched"
             class="invalid-feedback"
           >
             A Senha deve ter no mínimo 6 caracteres.
@@ -163,6 +163,7 @@
           <button
             class="btn btn-lg btn-success btn-block px-5"
             [disabled]="!frmRegistration.valid"
+            (click)="cadastrarUsuario()"
           >
             Registar
           </button>

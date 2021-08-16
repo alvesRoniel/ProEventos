@@ -32,7 +32,7 @@ export class AuthService {
   }
 
   register(model: any): Observable<any> {
-    return this.httpClient.post(`${this.baseURL}login`, model);
+    return this.httpClient.post(`${this.baseURL}Register`, model);
   }
 
   showMenu(): boolean {

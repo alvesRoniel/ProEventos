@@ -25,6 +25,8 @@ import { AppRoutingModule } from './app-routing.module';
 /*Services*/
 import { EventoService } from './services/evento.service';
 import { LoteService } from './services/lote.service';
+import { AuthService } from './services/auth.service';
+
 
 /*Components*/
 import { AppComponent } from './app.component';
@@ -84,7 +86,8 @@ defineLocale('pt-br', ptBrLocale);
   ],
   providers: [
     EventoService,
-    LoteService
+    LoteService,
+    AuthService
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

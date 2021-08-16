@@ -86,7 +86,7 @@ export class EventoDetalheComponent implements OnInit {
 
           //Para carregar a imagem
           if (this.evento.imagemURL !== '') {
-            this.imagemURL = environment.apiURL +'resources/images/' + this.evento.imagemURL;
+            this.imagemURL = environment.apiURL + 'resources/images/' + this.evento.imagemURL;
           }
 
           // Carrega os lotes do evento.

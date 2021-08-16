@@ -3,27 +3,49 @@
     <form class="form-signin" [formGroup]="frmLogin">
       <i class="fa fa-users mb-2"></i>
       <h1 class="h3 mb-3 font-weight-normal">Entrar com</h1>
-      <label for="username" class="sr-only">Usuário</label>
-      <input
-        type="email"
-        formControlName="email"
-        id="username"
-        class="form-control"
-        placeholder="Usuário"
-        name="username"
-        required
-      />
-      <label for="password" class="sr-only">Password</label>
-      <input
-        type="password"
-        formControlName="password"
-        id="password"
-        class="form-control"
-        placeholder="Senha"
-        name="password"
-        required
-      />
-      <button class="btn btn-lg btn-primary btn-block" type="submit">
+
+      <div>
+        <label for="username" class="sr-only">Usuário</label>
+        <input
+          type="text"
+          formControlName="userName"
+          id="username"
+          class="form-control"
+          placeholder="Usuário"
+          name="username"
+          required
+          [ngClass]="cssValidator(f.userName)"
+        />
+        <div *ngIf="f.userName.errors?.required" class="invalid-feedback">
+          O usuário é obrigatório.
+        </div>
+      </div>
+
+      <div>
+        <label for="password" class="sr-only">Password</label>
+        <input
+          type="password"
+          formControlName="password"
+          id="password"
+          class="form-control"
+          placeholder="Senha"
+          name="password"
+          required
+          [ngClass]="cssValidator(f.password)"
+        />
+        <div *ngIf="f.password.errors?.required" class="invalid-feedback">
+          O password é obrigatório.
+        </div>
+        <div *ngIf="f.password.errors?.minlength" class="invalid-feedback">
+          O password deve ter no mínimo 4 caracteres.
+        </div>
+      </div>
+
+      <button
+        class="btn btn-lg btn-primary btn-block"
+        type="submit"
+        [disabled]="!frmLogin.valid"
+      >
         Entrar
       </button>
       <p class="mt-4 mb-2 text-muted">Não tem login? Cadastre-se abaixo</p>

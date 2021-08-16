@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -10,6 +10,10 @@ export class LoginComponent implements OnInit {
 
   frmLogin!: FormGroup;
 
+  get f(): any {
+    return this.frmLogin.controls;
+  }
+
   constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
@@ -18,9 +22,13 @@ export class LoginComponent implements OnInit {
 
   validation(): void {
     this.frmLogin = this.formBuilder.group({
-      email: ['', Validators.required],
-      password: ['', Validators.required]
+      userName: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(4)]],
     });
+  }
+
+  public cssValidator(campoForm: FormControl | AbstractControl): any {
+    return { 'is-invalid': campoForm.errors && campoForm.touched };
   }
 
 }

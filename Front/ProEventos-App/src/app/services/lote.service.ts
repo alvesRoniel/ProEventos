@@ -14,32 +14,30 @@ import { environment } from '@environments/environment';
 export class LoteService {
 
   // visual 2019
-   baseURL =  environment.apiURL + 'api/lotes';
+  baseURL = environment.apiURL + 'api/lotes';
 
   // vscode
   // baseURL = 'https://localhost:5001/api/eventos';
 
-  tokenHeader: HttpHeaders;
 
   constructor(private httpClient: HttpClient) {
-    this.tokenHeader = new HttpHeaders({ Authorization: `Bearer ${localStorage.getItem('token')}` });
-   }
+  }
 
   getLotesByEventoId(eventoId: number): Observable<Lote[]> {
     return this.httpClient
-      .get<Lote[]>(`${this.baseURL}/${eventoId}`, { headers: this.tokenHeader })
+      .get<Lote[]>(`${this.baseURL}/${eventoId}`)
       .pipe(take(1));
   }
 
   saveLote(eventoId: number, lotes: Lote[]): Observable<Lote[]> {
     return this.httpClient
-      .put<Lote[]>(`${this.baseURL}/${eventoId}`, lotes, { headers: this.tokenHeader })
+      .put<Lote[]>(`${this.baseURL}/${eventoId}`, lotes)
       .pipe(take(1));
   }
 
   deletarLote(eventoId: number, loteId: number): Observable<any> {
     return this.httpClient
-      .delete<string>(`${this.baseURL}/${eventoId}/${loteId}`, { headers: this.tokenHeader })
+      .delete<string>(`${this.baseURL}/${eventoId}/${loteId}`)
       .pipe(take(1));
   }
 }

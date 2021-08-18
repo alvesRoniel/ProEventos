@@ -17,41 +17,39 @@ export class EventoService {
   // vscode
   // baseURL = 'https://localhost:5001/api/eventos';
 
-  tokenHeader: HttpHeaders;
 
   constructor(private httpClient: HttpClient) {
-    this.tokenHeader = new HttpHeaders({ Authorization: `Bearer ${localStorage.getItem('token')}` });
   }
 
   getEvento(): Observable<Evento[]> {
-    return this.httpClient.get<Evento[]>(this.baseURL, { headers: this.tokenHeader })
+    return this.httpClient.get<Evento[]>(this.baseURL)
       .pipe(take(1));
   }
 
   getEventosByTema(tema: string): Observable<Evento[]> {
-    return this.httpClient.get<Evento[]>(`${this.baseURL}/tema/${tema}`, { headers: this.tokenHeader })
+    return this.httpClient.get<Evento[]>(`${this.baseURL}/tema/${tema}`)
       .pipe(take(1));
   }
 
   getEventoById(id: number): Observable<Evento> {
-    return this.httpClient.get<Evento>(`${this.baseURL}/${id}`, { headers: this.tokenHeader })
+    return this.httpClient.get<Evento>(`${this.baseURL}/${id}`)
       .pipe(take(1));
   }
 
   salvarEvento(evento: Evento): Observable<Evento> {
     return this.httpClient
-      .post<Evento>(this.baseURL, evento, { headers: this.tokenHeader })
+      .post<Evento>(this.baseURL, evento)
       .pipe(take(1));
   }
 
   alterarEvento(evento: Evento): Observable<Evento> {
     return this.httpClient
-      .put<Evento>(`${this.baseURL}/${evento.id}`, evento, { headers: this.tokenHeader })
+      .put<Evento>(`${this.baseURL}/${evento.id}`, evento)
       .pipe(take(1));
   }
 
   deletarEvento(id: number): Observable<any> {
-    return this.httpClient.delete<string>(`${this.baseURL}/${id}`, { headers: this.tokenHeader })
+    return this.httpClient.delete<string>(`${this.baseURL}/${id}`)
       .pipe(take(1));
   }
 
@@ -61,7 +59,7 @@ export class EventoService {
     formData.append('file', fileToUpload);
 
     return this.httpClient
-      .post<Evento>(`${this.baseURL}/upload-image/${eventoId}`, formData, { headers: this.tokenHeader })
+      .post<Evento>(`${this.baseURL}/upload-image/${eventoId}`, formData)
       .pipe(take(1));
   }
 }

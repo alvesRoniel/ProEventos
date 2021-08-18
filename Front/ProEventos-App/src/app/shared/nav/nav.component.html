@@ -17,7 +17,7 @@
     </button>
 
     <div
-      *ngIf="showMenu()"
+      *ngIf="loggedIn()"
       class="collapse navbar-collapse"
       [collapse]="isCollapsed"
       [isAnimated]="true"
@@ -48,7 +48,7 @@
             aria-expanded="false"
             style="cursor: pointer"
           >
-            Roniel
+            {{ authService.decodeToken?.unique_name }}
           </a>
           <div
             *dropdownMenu
@@ -57,10 +57,16 @@
           >
             <a class="dropdown-item" routerLink="user/perfil"> Perfil </a>
             <div role="separator" class="divider"></div>
-            <a class="dropdown-item" routerLink="user/login"> Sair </a>
+            <a class="dropdown-item" style="cursor: pointer" (click)="logout()">
+              Sair
+            </a>
           </div>
         </li>
       </ul>
     </div>
+
+    <button *ngIf="!loggedIn()" class="btn btn-success" (click)="entrar()">
+      Entrar
+    </button>
   </div>
 </nav>

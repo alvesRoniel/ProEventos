@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '@app/services/auth.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
+import { throwIfEmpty } from 'rxjs/operators';
 
 @Component({
   selector: 'app-nav',
@@ -11,19 +15,28 @@ export class NavComponent implements OnInit {
   isCollapsed = true;
 
   constructor(
-    private router: Router
+    private spinner: NgxSpinnerService,
+    private toastr: ToastrService,
+    private router: Router,
+    public authService: AuthService
   ) { }
 
   ngOnInit(): void {
   }
 
-  // showMenu(): boolean {
-  //   return this.router.url !== '/user/login';
-  // }
+  loggedIn(): boolean {
+    return this.authService.loggedIn();
 
-  showMenu(): boolean {
-    return false;
+  }
 
+  logout(): void {
+    localStorage.removeItem('token');
+    this.toastr.show('Log Out');
+    this.router.navigate(['/user/login']);
+  }
+
+  entrar(): void {
+    this.router.navigate(['/user/login']);
   }
 
 }

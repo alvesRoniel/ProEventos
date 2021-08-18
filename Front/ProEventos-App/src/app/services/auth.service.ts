@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, Input } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { environment } from '@environments/environment';
 import { Observable } from 'rxjs';
@@ -18,9 +18,10 @@ export class AuthService {
   decodeToken: any;
 
   constructor(private httpClient: HttpClient) { }
+  @Input() nomeUsuarioLogado: any;
 
   login(model: any): Observable<any> {
-    return this.httpClient.post(`${this.baseURL}login`, model).pipe(
+    return this.httpClient.post<Observable<any>>(`${this.baseURL}login`, model).pipe(
       map((RESPONSE: any) => {
         const user = RESPONSE;
         if (user) {
@@ -35,7 +36,7 @@ export class AuthService {
     return this.httpClient.post(`${this.baseURL}Register`, model);
   }
 
-  showMenu(): boolean {
+  loggedIn(): boolean {
     const token = localStorage.getItem('token');
     return !this.jwtHelper.isTokenExpired(token);
   }

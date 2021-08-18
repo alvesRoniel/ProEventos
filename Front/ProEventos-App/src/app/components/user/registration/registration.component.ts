@@ -54,6 +54,7 @@ export class RegistrationComponent implements OnInit {
 
   cadastrarUsuario(): void {
     if (this.frmRegistration.valid) {
+      this.spinner.show();
 
       this.frmRegistration.get('fullName').setValue(this.frmRegistration.get('primeiroNome').value + " " +
         this.frmRegistration.get('ultimoNome').value);

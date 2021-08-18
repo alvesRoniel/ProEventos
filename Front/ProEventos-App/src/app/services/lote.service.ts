@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -19,23 +19,27 @@ export class LoteService {
   // vscode
   // baseURL = 'https://localhost:5001/api/eventos';
 
-  constructor(private httpClient: HttpClient) { }
+  tokenHeader: HttpHeaders;
+
+  constructor(private httpClient: HttpClient) {
+    this.tokenHeader = new HttpHeaders({ Authorization: `Bearer ${localStorage.getItem('token')}` });
+   }
 
   getLotesByEventoId(eventoId: number): Observable<Lote[]> {
     return this.httpClient
-      .get<Lote[]>(`${this.baseURL}/${eventoId}`)
+      .get<Lote[]>(`${this.baseURL}/${eventoId}`, { headers: this.tokenHeader })
       .pipe(take(1));
   }
 
   saveLote(eventoId: number, lotes: Lote[]): Observable<Lote[]> {
     return this.httpClient
-      .put<Lote[]>(`${this.baseURL}/${eventoId}`, lotes)
+      .put<Lote[]>(`${this.baseURL}/${eventoId}`, lotes, { headers: this.tokenHeader })
       .pipe(take(1));
   }
 
   deletarLote(eventoId: number, loteId: number): Observable<any> {
     return this.httpClient
-      .delete<string>(`${this.baseURL}/${eventoId}/${loteId}`)
+      .delete<string>(`${this.baseURL}/${eventoId}/${loteId}`, { headers: this.tokenHeader })
       .pipe(take(1));
   }
 }

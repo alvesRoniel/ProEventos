@@ -18,7 +18,6 @@ export class AuthService {
   decodeToken: any;
 
   constructor(private httpClient: HttpClient) { }
-  @Input() nomeUsuarioLogado: any;
 
   login(model: any): Observable<any> {
     return this.httpClient.post<Observable<any>>(`${this.baseURL}login`, model).pipe(

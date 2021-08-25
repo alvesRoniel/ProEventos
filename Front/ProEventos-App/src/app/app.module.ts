@@ -15,6 +15,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgxCurrencyModule } from 'ngx-currency';
+import { NgxMaskModule, IConfig } from 'ngx-mask';
 
 /*Helprs*/
 import { DateTimeFormatPipe } from './helpers/DateTimeFormat.pipe';
@@ -82,8 +83,8 @@ defineLocale('pt-br', ptBrLocale);
       progressBar: true
     }),
     NgxSpinnerModule,
-    NgxCurrencyModule
-
+    NgxCurrencyModule,
+    NgxMaskModule.forRoot()
   ],
   providers: [
     EventoService, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

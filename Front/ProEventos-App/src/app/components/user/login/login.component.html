@@ -4,7 +4,7 @@
       <i class="fa fa-users mb-2"></i>
       <h1 class="h3 mb-3 font-weight-normal">Entrar com</h1>
 
-      <div>
+      <div style="margin-bottom: 5px;">
         <label for="userName" class="sr-only">Usuário</label>
         <input
           type="text"
@@ -13,8 +13,7 @@
           class="form-control"
           placeholder="Usuário"
           name="userName"
-          required
-          [ngClass]="cssValidator(f.userName)"
+
           [(ngModel)]="model.userName"
         />
         <div *ngIf="f.userName.errors?.required" class="invalid-feedback">
@@ -31,8 +30,7 @@
           class="form-control"
           placeholder="Senha"
           name="password"
-          required
-          [ngClass]="cssValidator(f.password)"
+
           [(ngModel)]="model.password"
         />
         <div *ngIf="f.password.errors?.required" class="invalid-feedback">

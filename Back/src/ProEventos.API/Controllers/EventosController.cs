@@ -7,6 +7,7 @@ using ProEventos.Application.DTOs;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ProEventos.API.Controllers
 {
@@ -23,6 +24,7 @@ namespace ProEventos.API.Controllers
             _hostEnvironment = hostEnvironment;
         }
 
+        //[AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> Get()
         {

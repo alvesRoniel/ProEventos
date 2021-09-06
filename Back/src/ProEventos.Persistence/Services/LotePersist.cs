@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using ProEventos.Domain;
 using ProEventos.Persistence.Interfaces;
 using ProEventos.Persistence.Contextos;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ProEventos.Persistence
 {
@@ -24,6 +25,7 @@ namespace ProEventos.Persistence
             return await query.FirstOrDefaultAsync();
         }
 
+        [AllowAnonymous]
         public async Task<Lote[]> GetLotesByEventoIdAsync(int eventoId)
         {
             IQueryable<Lote> query = _context.Lotes;

@@ -12,3 +12,26 @@
 
 ## Funcionalidades
 - Cadastro, Listagem, Detalhes, Atualização e Remoção de Eventos e Lotes do Evento.
+
+## Telas do Sistema
+
+- Login
+
+![Tela de Login](https://github.com/alvesRoniel/ProEventos/blob/master/ImagensDaAplicacao/TelaLogin.jpg)
+
+- Cadastro de Usuários
+
+![Cadastro de Usuários](https://github.com/alvesRoniel/ProEventos/blob/master/ImagensDaAplicacao/CadastroDeUsuariojpg.jpg)
+
+- Cadastro de Eventos
+
+![Castro de Eventos](https://github.com/alvesRoniel/ProEventos/blob/master/ImagensDaAplicacao/CadastroDeEventos.jpg)
+
+- Listagem de Eventos
+
+![Listagem de Eventos](https://github.com/alvesRoniel/ProEventos/blob/master/ImagensDaAplicacao/ListaDeEventos.jpg)
+
+- Detalhes de Evento e Cadastro de Lotes
+
+![Listagem de Eventos](https://github.com/alvesRoniel/ProEventos/blob/master/ImagensDaAplicacao/DetalhesDoEvento.jpg)
+

@@ -8,7 +8,8 @@
 - AutoMapper
 - Injeção de Dependência
 - Programação Orientada a Objetos
-- Padrão Repository
+- Autenticação com ASP.NET Identity e JSON Web Token(JWT)
+
 
 ## Funcionalidades
 - Cadastro, Listagem, Detalhes, Atualização e Remoção de Eventos e Lotes do Evento.
@@ -35,3 +36,6 @@
 
 ![Listagem de Eventos](https://github.com/alvesRoniel/ProEventos/blob/master/ImagensDaAplicacao/DetalhesDoEvento.jpg)
 
+- Documetaçã doswagger
+
+![Listagem de Eventos](https://github.com/alvesRoniel/ProEventos/blob/master/ImagensDaAplicacao/Swagger.jpg)
